@@ -1,0 +1,18 @@
+@use "fonts" as f;
+@use "variables" as v;
+@use "sass:color";
+
+:root {
+  @each $name, $value in v.$colors {
+    --#{$name}: #{$value};
+    @if ($name == "black") {
+      --#{$name}-hover: #{color.scale($value, $lightness: 20%)};
+    } @else {
+      --#{$name}-hover: #{color.scale($value, $lightness: -20%)};
+    }
+  }
+}
+
+body {
+  font-family: f.$mainFont;
+}

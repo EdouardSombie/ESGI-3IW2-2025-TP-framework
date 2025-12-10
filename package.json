@@ -1,0 +1,12 @@
+{
+  "name": "tp-framework",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "watch": "sass --watch src/css/main.scss dist/css/main.css"
+  }
+}
