@@ -16,10 +16,20 @@
 
     @each $colorName, $colorValue in v.$colors {
       $hue: color.channel($colorValue, "hue", hsl);
-      // $saturation
-      // $lightness
+      $saturation: color.channel($colorValue, "saturation", hsl);
+      $lightness: color.channel($colorValue, "lightness", hsl);
 
       // parcourir la map des $shades
+      $previousPercent: 0%;
+      @each $code, $percent in v.$shades {
+        @if ($previousPercent < $lightness and $lightness < $percent) {
+          --#{$colorName}-#{$code}: hsl(#{$hue}, #{$saturation}, #{$lightness}); /* original */
+          @debug $colorName, $code;
+        } @else {
+          --#{$colorName}-#{$code}: hsl(#{$hue}, #{$saturation}, #{$percent});
+        }
+        $previousPercent: $percent;
+      }
     }
 
     /* variables couleurs agnostiques (serait bien de les générer avec sass... */
