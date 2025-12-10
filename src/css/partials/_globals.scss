@@ -11,8 +11,32 @@
       --#{$name}-hover: #{color.scale($value, $lightness: -20%)};
     }
   }
+
+  /* variables couleurs agnostiques (serait bien de les générer avec sass... */
+  --text-color: var(--black-hover); // nom de variable bizarre !!
+  --bg-color: var(--white);
+
+  @media (prefers-color-scheme: dark) {
+    --text-color: var(--white); // nom de variable bizarre !!
+    --bg-color: var(--black-hover);
+  }
 }
 
 body {
   font-family: f.$mainFont;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  &.halloween {
+    --text-color: var(--black); // nom de variable bizarre !!
+    --bg-color: orange;
+  }
+  &[data-theme="dark"] {
+    --text-color: var(--white); // nom de variable bizarre !!
+    --bg-color: var(--black-hover);
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
