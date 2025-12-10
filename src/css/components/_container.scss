@@ -1,14 +1,15 @@
 @use "../partials/variables" as v;
-
-.container {
-  margin-inline: 1rem;
-  // parcourir la map des breakpoints et pour chacun : définir une media query
-  @each $name, $size in v.$breakpoints {
-    @media (width > $size) {
-      @if ($name == "sm") {
-        margin-inline: auto;
+@layer components {
+  .container {
+    margin-inline: 1rem;
+    // parcourir la map des breakpoints et pour chacun : définir une media query
+    @each $name, $size in v.$breakpoints {
+      @media (width > $size) {
+        @if ($name == "sm") {
+          margin-inline: auto;
+        }
+        max-width: calc($size - 4rem);
       }
-      max-width: calc($size - 4rem);
     }
   }
 }
