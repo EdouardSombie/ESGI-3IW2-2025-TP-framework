@@ -1,3 +1,4 @@
+@use "variables" as v;
 $positions: (
   "t": "top",
   "b": "bottom",
@@ -20,6 +21,17 @@ $positions: (
       .m#{$letter}--#{$i} {
         margin-#{$value}: $val;
       }
+    }
+  }
+  @each $name, $value in v.$colors {
+    .bg-#{$name} {
+      background-color: var(--#{$name});
+    }
+    .border-#{$name} {
+      border-color: var(--#{$name});
+    }
+    .color-#{$name} {
+      color: var(--#{$name});
     }
   }
 }
