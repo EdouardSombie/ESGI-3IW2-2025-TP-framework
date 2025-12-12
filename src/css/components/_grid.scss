@@ -1,0 +1,34 @@
+@use "../partials/variables" as v;
+@layer components {
+  .grid {
+    $ColNb: 12;
+    display: grid;
+    // 12 colonnes de la même largeur séparée de 6 fois le --spacing
+    grid-template-columns: repeat($ColNb, 1fr);
+    gap: calc(6 * var(--spacing));
+
+    // tous les éléments ayant une classe qui commence par col-- occupent toute la largeur
+    [class^="col--"] {
+      grid-column: 1 / -1;
+    }
+
+    // définition des classes .col--1 à .col--12
+    // @for...
+    @for $i from 1 through $ColNb {
+      .col--#{$i} {
+        grid-column: span #{$i};
+      }
+    }
+
+    // définir les classes col--md--1 ... en s"appuyant sur la map $breakpoints
+    @each $name, $size in v.$breakpoints {
+      @media (width > $size) {
+        @for $i from 1 through $ColNb {
+          .col--#{$name}--#{$i} {
+            grid-column: span #{$i};
+          }
+        }
+      }
+    }
+  }
+}
